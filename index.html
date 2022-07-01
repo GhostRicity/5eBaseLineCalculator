@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5e Baseline</title>
+    <style>
+    </style>
+</head>
+
+<body>
+    <p id="sum"></p>
+    <h1></h1> 
+</body>
+</html>
+
+
+
+<script type="text/javascript">
+//variabels
+var ac = 18, rounds = 10;
+var attackBonus = 4;
+var proficiencies = 4;
+var arrchery = 2;
+var toHit = attackBonus + proficiencies;
+var attacksMatila9th = 18;  //This value is for 10 rounds of combat 
+var criticalHitThresholdNumber = 20;
+
+//fighter specific bonuses
+var acctionSurge = 2;
+var fighterCurentAttacks = acctionSurge + attacksMatila9th;
+
+//longbow
+var longBowAvrageDmg = 4.5;
+var longBowMinDmg = 1;
+var longBowMaxDmg = 8;
+
+//call base line fisgter dmg
+var DPR = [];
+
+for (let index = 0; index < 100; index++) {
+    baseline();    
+}
+
+
+function baseline(){
+    //10 round ac 18 and level 9charecter with 18 in main statistics and using a long bow and arrchery so 2 attacks
+   // ()/10 // for ten rounds
+   //add criticlas
+   for (let index = 0; index < fighterCurentAttacks; index++) {
+    var d20 = Math.floor(Math.random() * (20 - 0) + 1)
+    var totalToHit = d20 + toHit + arrchery; 
+    //Add action surge. This will be 2 extra attacks in the 10 loop
+    if (totalToHit >= ac) {
+        if (d20 == criticalHitThresholdNumber) {
+            var crit = (longBowAvrageDmg*2) + attackBonus;
+            //console.log("Crit " + d20 + " " + crit);
+            DPR.push(crit);
+            //console.log(crit);
+        } else {
+        //console.log("You hit with " + totalToHit + " on AC of " + ac);
+        var base = longBowAvrageDmg + attackBonus;
+        DPR.push(base);  
+        }
+    } 
+   }
+   var sum = (DPR.reduce((a, b) => a + b))/1000;
+   //console.log("A Fighters avrage dmg is " + sum);
+   document.getElementById("sum").innerHTML = "Archery Fighters avrage DPR is " + sum;
+
+
+
+}
+
+var mainigais = 5;
+const constantais = 6; 
+
+var x = mainigais * constantais;
+console.log(x); 
+
+
+console.log(mainigais);
+
+if(mainigais > 3){
+    console.log("mainigs ir lielks par 3 " + mainigais)
+} else {
+
+}
+
+
+
+</script>
+
+
